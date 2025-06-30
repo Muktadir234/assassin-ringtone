@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Assassin's Creed Ringtone</title>
-  </head>
-  <body>
-    <h2>Loading ringtone...</h2>
-    <audio id="ringtone" autoplay>
-      <source src="assassins_creed_2.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assassin's Creed Ringtone</title>
+</head>
+<body style="background-color: black; color: white; text-align: center; padding-top: 100px;">
+  <h1>🔊 Assassin's Creed Ringtone</h1>
+  <p>The ringtone will play automatically...</p>
 
-    <script>
-      const audio = document.getElementById('ringtone');
-      // Try to play automatically on page load
-      window.addEventListener('load', () => {
-        const playPromise = audio.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {
-            // Try again after a short delay (helps on some mobile devices)
-            setTimeout(() => audio.play(), 500);
-          });
-        }
-      });
-    </script>
-  </body>
+  <audio id="ringtone" autoplay>
+    <source src="assassins_creed_2.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const audio = document.getElementById('ringtone');
+    window.addEventListener('load', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.log('Autoplay failed, trying again...');
+          setTimeout(() => audio.play(), 1000);
+        });
+      }
+    });
+  </script>
+</body>
 </html>
