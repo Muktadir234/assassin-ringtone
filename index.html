@@ -3,27 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Assassin's Creed Ringtone</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+      font-family: sans-serif;
+    }
+  </style>
 </head>
-<body style="background-color: black; color: white; text-align: center; padding-top: 100px;">
-  <h1>🔊 Assassin's Creed Ringtone</h1>
-  <p>The ringtone will play automatically...</p>
+<body>
+  <h1>🔊 Hidden Ringtone Loading...</h1>
+  <p>Just move your finger or mouse to activate sound.</p>
 
-  <audio id="ringtone" autoplay>
+  <audio id="ringtone">
     <source src="assassins_creed_2.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
   <script>
     const audio = document.getElementById('ringtone');
-    window.addEventListener('load', () => {
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.log('Autoplay failed, trying again...');
-          setTimeout(() => audio.play(), 1000);
-        });
-      }
-    });
+    const playAudio = () => {
+      audio.play();
+      document.body.removeEventListener('touchstart', playAudio);
+      document.body.removeEventListener('mousemove', playAudio);
+    };
+    document.body.addEventListener('touchstart', playAudio);
+    document.body.addEventListener('mousemove', playAudio);
   </script>
 </body>
 </html>
